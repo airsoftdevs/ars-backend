@@ -1,0 +1,33 @@
+version: '3'
+services:
+
+  ################################################
+  ## Local Sites Setup:                         ##
+  ## Postgres, Elastic Search                   ##
+  ################################################
+
+  # You know, for search
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.1.0
+    command: elasticsearch
+    logging:
+      driver: none
+    ports:
+      - 9200:9200
+    volumes:
+      - ./docker/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./docker/elasticsearch/config/logging.yml:/usr/share/elasticsearch/config/logging.yml
+      - ./docker/elasticsearch/data:/usr/share/elasticsearch/data
+
+  # Primary data store
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_DB=poc
+      - POSTGRES_PASSWORD=pass
+    volumes:
+      - ./docker/postgres/data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
