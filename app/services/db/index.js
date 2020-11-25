@@ -9,14 +9,6 @@ let models;
 let sequelize;
 
 /**
- * @deprecated
- * Approach with a better performace for array population
- */
-function populateArray({ select = '*', path, model, ref }) {
-  return `select ${select} from "${ref}" c where c.id in (select (jsonb_array_elements_text(data::jsonb->'${path}'))::uuid  from "${model}")`;
-}
-
-/**
  * Add a hook for services
  * @param {string} entity
  * @param {string} hook
@@ -36,7 +28,7 @@ function subscribe(entity, hook) {
  *
  * @param {import('sequelize').ModelCtor<import('sequelize').Model>} model Sequelize model
  */
-function getController(model) {
+function getModelHelper(model) {
   /**
    * @type {import('sequelize').ModelCtor<import('sequelize').Model>}
    */
@@ -145,8 +137,7 @@ function startTransaction(cb) {
   return sequelize.transaction(cb);
 }
 module.exports.startTransaction = startTransaction;
-module.exports.getController = getController;
-module.exports.populateArray = populateArray;
+module.exports.getModelHelper = getModelHelper;
 module.exports.subscribe = subscribe;
 module.exports.setInstances = (_models, _sequelize) => {
   models = _models;

@@ -1,0 +1,19 @@
+name:
+  first: ''
+  last: ''
+data:
+  username: ''
+  birthday: ''
+  gender: ''
+  identification: ''
+  phone: ''
+  picture: ''
+  preferences: {}
+  provider: local
+  address:
+    line1: ''
+    line2: ''
+    city: ''
+    country: ''
+    state: ''
+    zipcode: ''
