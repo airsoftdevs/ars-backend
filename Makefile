@@ -1,19 +1,20 @@
+services = postgres
 
 start:
 	make start-services && make start-server
 
 start-services:
-	docker-compose up -d postgres elasticsearch
+	docker-compose up -d $(services)
 
 start-server:
-	cd app && npm i && npm run check-elastic && npm run start:dev
+	cd app && npm i && npm run start:dev
 
 stop-services:
-	docker-compose stop postgres elasticsearch
+	docker-compose stop $(services)
 
 remove-containers:
 	@echo "Removing all stopped containers..."
-	docker-compose rm postgres elasticsearch
+	docker-compose rm $(services)
 
 burn:
 	@echo "Stopping and removing all containers..."

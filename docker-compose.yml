@@ -25,7 +25,7 @@ services:
     restart: always
     environment:
       - POSTGRES_USER=user
-      - POSTGRES_DB=poc
+      - POSTGRES_DB=ars
       - POSTGRES_PASSWORD=pass
     volumes:
       - ./docker/postgres/data:/var/lib/postgresql/data
