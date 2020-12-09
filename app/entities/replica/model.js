@@ -9,6 +9,9 @@ module.exports = sequelize => {
     },
     data: {
       type: DataTypes.JSONB
+    },
+    type: {
+      type: DataTypes.STRING
     }
   });
 };
