@@ -23,4 +23,7 @@ burn:
 clean-data:
 	rm -rf ./docker/**/data
 
+reset:
+	make burn clean-data start
+
 default: start

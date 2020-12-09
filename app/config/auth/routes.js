@@ -78,12 +78,6 @@ module.exports = function(router) {
   ['user'].forEach(entity => router.post(`/_auth/local-${entity}`, localController(entity)));
   [].forEach(provider => createRoutesByProvider(router, provider));
 
-  router.post('/api/:model', authenticate(), (req, res, next) => {
-    req.body = req.body || {};
-    req.body.createdBy = req.user.id;
-    next();
-  });
-
   const serviceExp = /^\/_([a-zA-Z]*)/;
 
   router.all(serviceExp, (req, res, next) => {
