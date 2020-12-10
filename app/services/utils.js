@@ -8,8 +8,8 @@ const path = require('path');
  * @param {string} name entity name
  * @returns {string} path
  */
-function generateRouterPath(name) {
-  return `/api/${name}`;
+function generateRouterPath(name, version = 'v1') {
+  return `/api/${version}/${name}`;
 }
 
 /**

@@ -84,7 +84,7 @@ module.exports = function(router) {
     req.ctx = req.ctx || {};
     req.ctx.service = req.url.match(serviceExp)[1];
 
-    if (!req.url.includes('/_auth')) {
+    if (!['/_auth', '/_docs'].some(path => req.url.includes(path))) {
       return authenticate(['user'])(req, res, next);
     }
     return next();
