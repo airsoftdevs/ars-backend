@@ -8,7 +8,7 @@ services:
 
   # You know, for search
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.1.0
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.9.0
     command: elasticsearch
     logging:
       driver: none
@@ -25,7 +25,7 @@ services:
     restart: always
     environment:
       - POSTGRES_USER=user
-      - POSTGRES_DB=poc
+      - POSTGRES_DB=ars
       - POSTGRES_PASSWORD=pass
     volumes:
       - ./docker/postgres/data:/var/lib/postgresql/data

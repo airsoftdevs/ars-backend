@@ -1,6 +1,1 @@
-user:
-  hasMany: 
-    - order
-    - foreignKey: userId 
-order:
-  belongsTo: user
+

@@ -1,7 +1,7 @@
 module.exports = {
   parserOptions: {
     sourceType: 'module',
-    ecmaVersion: '2017',
+    ecmaVersion: '2018',
     ecmaFeatures: {
       jsx: true,
       arrowFunctions: true
@@ -11,15 +11,6 @@ module.exports = {
   extends: ['eslint:recommended', 'plugin:prettier/recommended'],
   // add global vars for chai, etc
   rules: {
-    // possible errors
-    'valid-jsdoc': [
-      1,
-      {
-        requireReturn: false,
-        requireParamDescription: false,
-        requireReturnDescription: false
-      }
-    ],
     // best practices
     'prefer-template': 2,
     'default-case': 2,
