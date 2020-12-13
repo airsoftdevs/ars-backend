@@ -2,15 +2,9 @@ openapi: 3.0.3
 info:
   title: ARS Backend
 servers:
-  -
-    url: /api/{version}
-    description: API endpoints
-    variables:
-      version:
-        default: v1
-        description: API Version
-        enum:
-          - v1
+  - url: /api/v1
+  - url: '/'
+
 paths:
   '/_auth/local-user':
     post:
@@ -49,6 +43,7 @@ paths:
           description: Invalid Credentials
           content: 
             application/json: {}
+
 components:
   schemas:
     Address:

@@ -17,6 +17,7 @@ paths:
             application/json: {}
       security:
         - auth_token: []
+
 components:
   schemas:
     User:

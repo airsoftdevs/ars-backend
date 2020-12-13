@@ -31,15 +31,15 @@ function loadFiles(models) {
   });
 }
 
-function defaultDefinition(modelName) {
+function defaultDefinition([singular, plural]) {
   const referenceFile = JSON.stringify(parseYaml(`${__dirname}/default-definitions.yml`));
 
   return JSON.parse(
     referenceFile
-      .replace(/<Plural>/g, modelName[1])
-      .replace(/<plural>/g, modelName[1].toLocaleLowerCase())
-      .replace(/<Singular>/g, modelName[0])
-      .replace(/<singular>/g, modelName[0].toLocaleLowerCase())
+      .replace(/<Plural>/g, plural)
+      .replace(/<plural>/g, plural.toLocaleLowerCase())
+      .replace(/<Singular>/g, singular)
+      .replace(/<singular>/g, singular.toLocaleLowerCase())
   );
 }
 
