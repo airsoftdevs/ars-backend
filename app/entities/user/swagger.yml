@@ -4,7 +4,7 @@ paths:
       tags:
         - Users
       summary: Get Users
-      description: This returns a list of users
+      description: This returns a list of users custom
       operationId: getUsers
       responses:
         '200':
