@@ -15,6 +15,10 @@ module.exports = sequelize => {
       type: DataTypes.JSONB,
       allowNull: false
     },
+    identification: {
+      type: DataTypes.JSONB,
+      allowNull: false
+    },
     email: {
       type: DataTypes.STRING,
       unique: true,

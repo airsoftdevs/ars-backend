@@ -20,18 +20,27 @@ paths:
         - name: sortBy
           in: query
           description: JSON to define sort strategy
-          schema:
-            type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  createdAt:
+                    type: string
         - name: match
           in: query
           description: JSON for key:value matching (AND)
-          schema:
-            type: string
+          content:
+            application/json:
+              schema:
+                type: object
         - name: search
           in: query
           description: Similar to match but more flexible (OR, LIKE)
-          schema:
-            type: string
+          content:
+            application/json:
+              schema:
+                type: object
       responses:
         '200':
           description: Content

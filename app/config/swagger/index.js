@@ -17,7 +17,7 @@ function loadFiles(models) {
     const model = models[entity];
     const modelName = [model.name, model.getTableName()];
 
-    Object.keys(swaggerFile.paths).forEach(key => {
+    Object.keys(swaggerFile.paths || {}).forEach(key => {
       const path = swaggerFile.paths[key];
       const namespace = `${route}${key}`.replace(/\/$/, '');
 
@@ -27,7 +27,6 @@ function loadFiles(models) {
       swaggerFile.paths[namespace] = path;
     });
 
-    console.log(swaggerFile);
     _.merge(swaggerDocument, swaggerFile);
   });
 }

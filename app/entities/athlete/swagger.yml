@@ -1,25 +1,6 @@
-paths:
-  /:
-    get:
-      tags:
-        - Users
-      summary: Get Users
-      description: This returns a list of users custom
-      operationId: getUsers
-      responses:
-        '200':
-          description: Content
-          content: 
-            application/json: {}
-        '401':
-          description: Unauthorized
-          content: 
-            application/json: {}
-      security:
-        - auth_token: []
 components:
   schemas:
-    User:
+    Athlete:
       type: object
       properties:
         id:
@@ -31,6 +12,16 @@ components:
               type: string
             last:
               type: string
+        identification:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+                - passport
+                - dni
         data:
           type: object
           properties:
@@ -39,6 +30,9 @@ components:
             birthday:
               type: string
               format: date-time
+            clubs:
+              type: array
+              items: string
             gender:
               type: string
             username:
@@ -51,11 +45,6 @@ components:
         email:
           type: string
           format: email
-        password:
-          type: string
-          format: password
       required:
         - id
         - email
-        - name
-        - password
