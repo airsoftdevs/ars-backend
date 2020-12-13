@@ -1,11 +1,13 @@
 name:
   first: ''
   last: ''
+identification:
+  type: ''
+  id: ''
 data:
   username: ''
   birthday: ''
   gender: ''
-  identification: ''
   phone: ''
   picture: ''
   preferences: {}

@@ -1,0 +1,76 @@
+openapi: 3.0.3
+info:
+  title: ARS Backend
+servers:
+  - url: /api/v1
+  - url: '/'
+
+paths:
+  '/_auth/local-user':
+    post:
+      tags:
+        - Authentication
+      summary: Auth User
+      description: This authenticates user using local strategy
+      operationId: authLocalUser
+      requestBody:
+        description: Credentials
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: Content
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                  token:
+                    type: string
+        '403':
+          description: Invalid Credentials
+          content: 
+            application/json: {}
+
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        state:
+          type: string
+        zipcode:
+          type: string
+    GetResponse:
+      type: object
+      properties:
+        count:
+          type: number
+        rows:
+          type: array
+  securitySchemes:
+    auth_token:
+      type: http
+      in: header
+      name: Authorization
+      scheme: Bearer

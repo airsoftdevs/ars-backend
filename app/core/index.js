@@ -2,13 +2,13 @@ const _merge = require('lodash/merge');
 const _get = require('lodash/get');
 const { Router } = require('express');
 const { generateRouterPath, parseYaml, getEntityName } = require('../services/utils');
-const { getFiles } = require('../services/files');
+const { getFiles, getFileVersion } = require('../services/files');
 const controller = require('../services/controller');
 const log = require('../services/log')({ file: __filename });
 
 let models;
 const configs = {},
-  boostrap = {};
+  bootstrap = {};
 
 /**
  * Load model.js files in directory to register in sequelize instance
@@ -32,12 +32,18 @@ function loadModels(sequelize) {
  * @param {Object} app
  */
 function loadControllers(app) {
-  getFiles('app/entities/**/controller.js', file => {
+  getFiles('app/entities/**/controller.*', file => {
     const entity = getEntityName(file);
     const router = require(file)(Router(), models[entity]);
+    const version = getFileVersion(file);
+    const namespace = generateRouterPath(entity, version);
 
-    app.use(generateRouterPath(entity), router);
-    log.debug(`"${entity}" routes registered on "/${entity}"`);
+    app.use(namespace, router);
+    log.debug('Custom router registered', {
+      entity,
+      namespace,
+      version
+    });
   });
 }
 
@@ -106,8 +112,10 @@ function loadBootstrapFiles() {
   getFiles('app/entities/**/bootstrap.yml', file => {
     const entity = getEntityName(file);
 
-    boostrap[entity] = parseYaml(file);
-    log.debug(`${entity} boostrap.yml file loaded`);
+    bootstrap[entity] = parseYaml(file);
+    log.debug('Bootstrap.yml file loaded', {
+      entity
+    });
   });
 }
 
@@ -147,7 +155,7 @@ module.exports = (app, sequelize, services = []) => {
   loadDefaultControllers(app);
 
   /** Needs to be moved in the future */
-  app.get('/_bootstrap', (req, res) => res.send(boostrap));
+  app.get('/_bootstrap', (req, res) => res.send(bootstrap));
 };
 
 /**

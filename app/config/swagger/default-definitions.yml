@@ -1,0 +1,204 @@
+paths:
+  /<singular>:
+    get:
+      tags:
+        - <Plural>
+      summary: Get <Plural>
+      description: This returns a list of <plural>
+      operationId: getUsers
+      parameters:
+        - name: rows
+          in: query
+          description: Number of <plural> to be returned by page
+          schema:
+            type: number
+        - name: page
+          in: query
+          description: Current page
+          schema:
+            type: number
+        - name: sortBy
+          in: query
+          description: JSON to define sort strategy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  createdAt:
+                    type: string
+        - name: match
+          in: query
+          description: JSON for key:value matching (AND)
+          content:
+            application/json:
+              schema:
+                type: object
+        - name: search
+          in: query
+          description: Similar to match but more flexible (OR, LIKE)
+          content:
+            application/json:
+              schema:
+                type: object
+      responses:
+        '200':
+          description: Content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                  rows:
+                    type: array
+                    items: 
+                      $ref: '#/components/schemas/<Singular>'
+        '401':
+          description: Unauthorized
+          content: 
+            application/json: {}
+      security:
+        - auth_token: []
+    post:
+      tags:
+        - <Plural>
+      summary: Post <Singular>
+      description: This create a new <singular>
+      operationId: postUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/<Singular>'
+      responses:
+        '200':
+          description: Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/<Singular>'
+        '401':
+          description: Unauthorized
+          content: 
+            application/json: {}
+      security:
+        - auth_token: []
+
+  '/<singular>/{id}':
+    get:
+      tags:
+        - <Plural>
+      summary: Get <Singular>
+      description: Returns <singular> data
+      operationId: getUser
+      parameters:
+        - name: id
+          in: path
+          description: <Singular> ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/<Singular>'
+        '401':
+          description: Unauthorized
+          content: 
+            application/json: {}
+      security:
+        - auth_token: []
+    put:
+      tags:
+        - <Plural>
+      summary: Put <Singular>
+      description: This replace a <singular>
+      operationId: putUser
+      parameters:
+        - name: id
+          in: path
+          description: <Singular> ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/<Singular>'
+      responses:
+        '200':
+          description: Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/<Singular>'
+        '401':
+          description: Unauthorized
+          content: 
+            application/json: {}
+      security:
+        - auth_token: []
+    patch:
+      tags:
+        - <Plural>
+      summary: Patch <Singular>
+      description: This updates specified <singular>
+      operationId: patchUser
+      parameters:
+        - name: id
+          in: path
+          description: <Singular> ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/<Singular>'
+      responses:
+        '200':
+          description: Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/<Singular>'
+        '401':
+          description: Unauthorized
+          content: 
+            application/json: {}
+      security:
+        - auth_token: []
+    delete:
+      tags:
+        - <Plural>
+      summary: Delete <Singular>
+      description: This delete a specific <singular>
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          description: <Singular> ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Content
+          content: 
+            application/json: {}
+        '401':
+          description: Unauthorized
+          content: 
+            application/json: {}
+      security:
+        - auth_token: []

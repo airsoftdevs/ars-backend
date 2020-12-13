@@ -1,0 +1,50 @@
+components:
+  schemas:
+    Athlete:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: object
+          properties:
+            first:
+              type: string
+            last:
+              type: string
+        identification:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+                - passport
+                - dni
+        data:
+          type: object
+          properties:
+            address:
+              $ref: '#/components/schemas/Address'
+            birthday:
+              type: string
+              format: date-time
+            clubs:
+              type: array
+              items: string
+            gender:
+              type: string
+            username:
+              type: string
+            phone:
+              type: string
+            picture:
+              type: string
+              format: url
+        email:
+          type: string
+          format: email
+      required:
+        - id
+        - email

@@ -12,5 +12,16 @@ module.exports = {
 
     if (each) files.forEach(each);
     return files;
+  },
+
+  /**
+   * Returns version based on filename
+   * @param {string} file
+   * @returns {string}
+   */
+  getFileVersion(file) {
+    const version = file.split('.')[1];
+
+    return version !== 'js' ? version : 'v1';
   }
 };

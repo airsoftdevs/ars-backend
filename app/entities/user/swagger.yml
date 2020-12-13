@@ -1,0 +1,62 @@
+paths:
+  /:
+    get:
+      tags:
+        - Users
+      summary: Get Users
+      description: This returns a list of users custom
+      operationId: getUsers
+      responses:
+        '200':
+          description: Content
+          content: 
+            application/json: {}
+        '401':
+          description: Unauthorized
+          content: 
+            application/json: {}
+      security:
+        - auth_token: []
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: object
+          properties:
+            first:
+              type: string
+            last:
+              type: string
+        data:
+          type: object
+          properties:
+            address:
+              $ref: '#/components/schemas/Address'
+            birthday:
+              type: string
+              format: date-time
+            gender:
+              type: string
+            username:
+              type: string
+            phone:
+              type: string
+            picture:
+              type: string
+              format: url
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+      required:
+        - id
+        - email
+        - name
+        - password
